@@ -1,10 +1,11 @@
-package com.example.algorithm.programmers;
+package com.example.algorithm.programmers.greedy;
 
+import com.example.algorithm.programmers.greedy.JoggingSuit;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Greedy1Test {
+class JoggingSuitTest {
 
     @Test
     void test_case1() {
@@ -14,10 +15,10 @@ class Greedy1Test {
         int[] reserves = new int[]{1,3,5};
 
         // when
-        Greedy1 greedy1 = new Greedy1();
+        JoggingSuit joggingSuit = new JoggingSuit();
 
         // then
-        assertThat(greedy1.solution(n, losts, reserves)).isEqualTo(5);
+        assertThat(joggingSuit.solution(n, losts, reserves)).isEqualTo(5);
     }
 
     @Test
@@ -28,10 +29,10 @@ class Greedy1Test {
         int[] reserves = new int[]{3};
 
         // when
-        Greedy1 greedy1 = new Greedy1();
+        JoggingSuit joggingSuit = new JoggingSuit();
 
         // then
-        assertThat(greedy1.solution(n, losts, reserves)).isEqualTo(4);
+        assertThat(joggingSuit.solution(n, losts, reserves)).isEqualTo(4);
     }
 
     @Test
@@ -42,10 +43,10 @@ class Greedy1Test {
         int[] reserves = new int[]{1};
 
         // when
-        Greedy1 greedy1 = new Greedy1();
+        JoggingSuit joggingSuit = new JoggingSuit();
 
         // then
-        assertThat(greedy1.solution(n, losts, reserves)).isEqualTo(2);
+        assertThat(joggingSuit.solution(n, losts, reserves)).isEqualTo(2);
     }
 
 }

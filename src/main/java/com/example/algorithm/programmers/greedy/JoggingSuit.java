@@ -1,11 +1,11 @@
-package com.example.algorithm.programmers;
+package com.example.algorithm.programmers.greedy;
 
 import java.util.Arrays;
 
 /**
  * 프로그래머스 - 체육복
 * */
-public class Greedy1 {
+public class JoggingSuit {
 
     public int solution(int n, int[] losts, int[] reserves) {
         int answer = n - losts.length;
