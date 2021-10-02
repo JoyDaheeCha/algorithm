@@ -2,6 +2,9 @@ package com.example.algorithm.programmers;
 
 import java.util.Arrays;
 
+/**
+ * 프로그래머스 - 체육복
+* */
 public class Greedy1 {
 
     public int solution(int n, int[] losts, int[] reserves) {
