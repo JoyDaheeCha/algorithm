@@ -1,6 +1,5 @@
-package com.example.algorithm.programmers.Hash;
+package com.example.algorithm.programmers.hash;
 
-import com.example.algorithm.programmers.Hash.Marathon;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

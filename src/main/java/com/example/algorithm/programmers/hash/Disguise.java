@@ -1,4 +1,4 @@
-package com.example.algorithm.programmers.Hash;
+package com.example.algorithm.programmers.hash;
 
 import java.util.Arrays;
 import static java.util.stream.Collectors.*;
