@@ -37,8 +37,10 @@ public class Boj1744 {
 
             if(positive.peek() == null) {
                 posSum += current; // 뒤 elment가 없으면 본인만 더한다.
-            } else {
-                posSum = current * positive.poll(); // 뒤 엘리먼트와 본인을 곱한 후, 더한다.
+            } else if (current == 1 || positive.peek() == 1) {
+                posSum += current; // 1일 경우 그냥 더하는게 이득
+            }  else {
+                posSum += current * positive.poll(); // 뒤 엘리먼트와 본인을 곱한 후, 더한다.
             }
         }
 
@@ -52,7 +54,7 @@ public class Boj1744 {
                     negSum += current; // 0을 가진 경우, 0과 곱하여 없앨 수 있다.
                 }
             } else {
-                negSum = current * negative.poll();
+                negSum += current * negative.poll();
             }
         }
 
