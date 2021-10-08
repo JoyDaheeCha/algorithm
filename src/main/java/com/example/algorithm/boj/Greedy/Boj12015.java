@@ -14,39 +14,43 @@ import java.util.*;
  * 설명: https://dragon-h.tistory.com/2
 * */
 public class Boj12015 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] nums = new int[n]; // 입력 받을 수열
 
-        List<Integer> list = new ArrayList<>();
-        list.add(0); // 배열의 첫 요소와 비교하기
+        int[] nums = new int[n];
 
         for (int i = 0; i < n; i++) {
             nums[i] = sc.nextInt();
         }
 
-        for (int i = 0; i < n; i++) {
-            int current = nums[i];
+        List<Integer> longest = new ArrayList<>();
+        longest.add(0);
 
-            if(current > list.get(list.size()-1)) {
-                list.add(current);
-            }
-            else{
+        for (int i = 0; i < n; i++) {
+            int curNum = nums[i];
+            int lastL = longest.get(longest.size()-1); // longest의 마지막 요소
+            if( lastL < curNum){
+                longest.add(curNum);
+            }else if(lastL == curNum) {
+                // do nothing
+            }else {
                 int left = 0;
-                int right = list.size() - 1;
-                while(left < right) {
-                    int mid = (left + right) / 2;
-                    if(list.get(mid) >= current) {
+                int right = longest.size() - 1;
+                int mid = (left + right) / 2;
+
+                if (left < right) {
+                    if (longest.get(mid) >= curNum) {
                         right = mid;
-                    }else{
+                    } else {
                         left = mid + 1;
                     }
                 }
-                list.set(right, current);
+                longest.set(right, curNum);
             }
         }
-        System.out.println(list.size()-1);
+
+        System.out.println(longest.size()-1);
     }
 }
