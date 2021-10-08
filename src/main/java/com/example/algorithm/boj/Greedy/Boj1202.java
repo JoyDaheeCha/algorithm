@@ -40,7 +40,7 @@ public class Boj1202 {
 
         PriorityQueue<Integer> queue = new PriorityQueue<>((p1, p2) -> Integer.compare(p2, p1)); // 가격 내림 차순 정렬
 
-        int priceSum = 0; // 보석 총 가격
+        long priceSum = 0; // 보석 총 가격
 
         int idx = 0; // 보석 idx
         for (int i = 0; i < k; i++) {
