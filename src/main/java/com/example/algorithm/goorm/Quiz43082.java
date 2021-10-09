@@ -5,6 +5,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
+/**
+ * 구름 EDU / 최단거리 구하기
+ *
+ * - 주의: 방문처리 하기!! (visit[i][j] = true)
+* */
 public class Quiz43082 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,67 +25,51 @@ public class Quiz43082 {
                 graph[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        
-        int start = 0;
-        int destination = n * n; // 예: n= 5 -> 25
-        
-        // 2. 각 좌표별로 고유 값 지정 (예. if n = 5, then [0.0] -> 1, [n-1][n-1] = 25)
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                graph[i][j] = (i+1)*(j+1) * graph[i][j];
+
+        // 도착지점 or 시작지점이 0이면 리턴
+        if(graph[0][0] == 0 || graph[n-1][n-1] == 0) {
+            return;
+        }
+
+        boolean[][] visit = new boolean[n][n]; // 방문함: true / 미방문: false
+
+        Queue<int[]> queue = new LinkedList<>();
+
+        queue.offer(new int[]{0,0});
+
+        while(!queue.isEmpty()) {
+            int[] pos = queue.poll(); // 현재 포지션
+            int i = pos[0];
+            int j = pos[1];
+
+            // 현재 destination이면 return
+            if(i == n-1 && j == n-1) {
+                System.out.println(graph[i][j]);
+                return;
             }
-        }
-        
-        
-        // 3. 연결 관계 정리
-        ArrayList<Integer>[] con = new ArrayList[destination + 1]; // 1~ destination 사용 예정 
 
-        for (int i = 1; i < destination + 1; i++) {
-            con[i] = new ArrayList<>(); // 초기화 꼭 해야함. 없으면 NPE 생김
-        }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int pos = graph[i][j]; // 현재 위치 고유 값
-                
-                if(pos != 0) {
-                    if (i - 1 >= 0 && graph[i - 1][j] > 0) { // 위 
-                        con[pos].add(graph[i - 1][j]);
-                    }
-                    if (i + 1 <= n -1 && graph[i + 1][j] > 0) { // 아래
-                        con[pos].add(graph[i + 1][j]);
-                    }
-                    if (j - 1 >= 0 && graph[i][j - 1] > 0) { // 왼쪽
-                        con[pos].add(graph[i][j - 1]);
-                    }
-                    if (j + 1 <= n -1 && graph[i][j + 1] > 0) { // 오른쪽
-                        con[pos].add(graph[i][j + 1]);
-                    }
+            if(!visit[i][j]) {
+                if (i - 1 >= 0 && graph[i - 1][j] > 0) { // 위
+                    queue.offer(new int[]{i - 1, j});
+                    graph[i - 1][j] = graph[i][j] + 1;
                 }
-            }
-        }
-
-        // 4. 오름차순으로 각 노드별 연결 관계 정렬
-        for (int i = 1; i < con.length; i++) {
-            Collections.sort(con[i]); // 0은 NPE 발생하므로 미포함
-        }
-
-        Queue<Integer> queue = new LinkedList<>();
-        
-        int[] distance = new int[destination+1]; //출발지점에서 각 node 별 거리 
-        
-        queue.offer(1);
-        
-        if(!queue.isEmpty()) {
-            int x = queue.poll();
-            
-            if (distance[x] == 0) {
-                for (Integer integer : con[x]) {
-                    
+                if (i + 1 <= n -1 && graph[i + 1][j] > 0) { // 아래
+                    queue.offer(new int[]{i + 1, j});
+                    graph[i + 1][j] = graph[i][j] + 1;
                 }
+                if (j - 1 >= 0 && graph[i][j - 1] > 0) { // 왼쪽
+                    queue.offer(new int[]{i, j - 1});
+                    graph[i][j - 1] = graph[i][j] + 1;
+                }
+                if (j + 1 <= n -1 && graph[i][j + 1] > 0) { // 오른쪽
+                    queue.offer(new int[]{i, j + 1});
+                    graph[i][j + 1] = graph[i][j] + 1;
+                }
+                visit[i][j] = true;
             }
         }
-        
-        
+
+        return;
+
     }
 }
