@@ -11,48 +11,55 @@ import java.util.List;
 * */
 public class Apartment {
     public static void main(String[] args) {
-        //System.out.println((solution(20, new int[]{4,11}, 2))); // 기댓값 4
+        System.out.println((solution(20, new int[]{4,11}, 2))); // 기댓값 4
         System.out.println((solution(16, new int[]{9}, 2))); // 기댓값 3
-        //System.out.println((solution(11, new int[]{4,11}, 1))); // 기댓값 3
+        System.out.println((solution(11, new int[]{4,11}, 1))); // 기댓값 3
     }
 
     public static int solution(int n, int[] stations, int w) {
-        // 1. 한 기지국의 영향 범위 구하기
-        int eLen = 1 + 2*w; // W는 자연수
+        int count = 0; // 기지국 총 갯수
 
-        int left = 0;
-        int right = 0;
+        int baseL = 0; // 기지국 전파 범위 시작
+        int baseR = 0; // 기지국 전파 범위 끝
 
-        int baseL = 0;
-        int baseR = 0;
+        int left = 0; // 전파 미도달 시작
+        int right = 0; // 전파 미도달 끝
+        int bandWidth = 2*w + 1;
 
-        int count = 0; // 추가로 설치할 기지국 수
         for (int i = 0; i < stations.length; i++) {
-            int cur = stations[i];
 
+            // 0. 기지국 이전에 위치한 아파트중 전파 미도달 범위 구하기
             left = baseR + 1;
 
-            baseL = cur - w;
-            baseR = cur + w;
+            int base = stations[i];
+            baseL = base - w;
+            baseR = base + w;
 
-            if(baseL < 0) baseL = 0;
+            if(baseL < 1) baseL = 1;
             if(baseR > n) baseR = n;
 
             right = baseL - 1;
 
-            if(right < 0) continue;
+            // 1. 예외: 두 기지국 사이에 전파 미도달 범위가 없을 경우 or 1번째 기지국이 앞의 아파트 모두 커버했을 경우
             if(right < left) continue;
 
-            double gap = (double) (right - left + 1) / eLen;
-            if(gap % 1 == 0) count += (int) gap;
-            else count += (int) gap + 1;
+            int gap = right - left + 1;
+
+            if(gap % bandWidth == 0) {
+                count += gap / bandWidth;
+            }else {
+                count += gap / bandWidth + 1;
+            }
         }
 
-        // 모두 다 커버되지 않았을 경우
-        if(baseR != n) {
-            double gap = (double) (n - (baseR+1) + 1) / eLen;
-            if(gap % 1 == 0) count += (int) gap;
-            else count += (int) gap + 1;
+        if (baseR != n) {
+            int gap = n - baseR;
+
+            if(gap % bandWidth == 0) {
+                count += gap / bandWidth;
+            }else {
+                count += gap / bandWidth + 1;
+            }
         }
 
         return count;
