@@ -1,4 +1,4 @@
-package com.example.algorithm.algoexpert;
+package com.example.algorithm.algoexpert.greedy;
 
 import java.util.Arrays;
 
