@@ -15,12 +15,11 @@ public class MinimumWaitingTime {
     public static int minimumWaitingTime(int[] queries) {
         Arrays.sort(queries); // 오름차순 정렬
 
-        int currentWait = 0;
         int totalWait = 0;
 
-        for (int i = 1; i < queries.length; i++) {
-            currentWait +=queries[i-1];
-            totalWait += currentWait;
+        int queriesLen = queries.length;
+        for (int i = 1; i < queriesLen; i++) {
+            totalWait += queries[i-1] * (queriesLen - i);
         }
         return totalWait;
     }
