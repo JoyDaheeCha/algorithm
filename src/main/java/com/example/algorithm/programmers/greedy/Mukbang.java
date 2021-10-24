@@ -11,32 +11,22 @@ import java.util.*;
 * */
 public class Mukbang {
     class Food {
-        private int time;
-        private int idx;
+        int time;
+        int idx;
 
-        public Food(int time, int idx) {
+        Food(int time, int idx) {
             this.time = time;
             this.idx = idx;
-        }
-
-        public int getTime() {
-            return time;
-        }
-
-        public int getIdx() {
-            return idx;
         }
     }
 
     Comparator<Food> byTime = new Comparator<Food>() {
-        @Override
         public int compare(Food o1, Food o2) {
             return o1.time - o2.time;
         }
     };
 
     Comparator<Food> byIdx = new Comparator<Food>() {
-        @Override
         public int compare(Food o1, Food o2) {
             return o1.idx - o2.idx;
         }
@@ -53,20 +43,22 @@ public class Mukbang {
 
         foods.sort(byTime);
 
-        int sum = 0; // 지금까지 사용한 총 시간
+        long sum = 0; // 지금까지 사용한 총 시간
         int prev = 0; //직전에 다 먹은 음식의 소요시간
         int length = foods.size(); //덜 먹고 남아있는 음식 갯수
 
         for (int j=0; j<foods.size(); j++) {
-            long diff = foods.get(j).getTime() - prev;
-            if(sum + diff * length <= k) {
-                sum += diff * length;
-                prev = foods.get(j).getTime();
+            int now = foods.get(j).time;
+            long diff = now - prev;
+            long spend = diff * length;
+            if(sum + spend <= k) {
+                sum += spend;
+                prev = now;
                 length--;
             }else {
-                int idx = ((int)k - sum) % length;
+                long idx = (k - sum) % length;
                 foods.subList(j, foods.size()).sort(byIdx);
-                return foods.get(j+idx).getIdx();
+                return foods.get(j+(int)idx).idx;
             }
         }
 
