@@ -1,4 +1,4 @@
-package com.example.algorithm.programmers.greedy;
+package com.example.algorithm.programmers.greedy.lv1;
 
 import java.util.Arrays;
 
