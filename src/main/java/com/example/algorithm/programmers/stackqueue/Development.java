@@ -34,6 +34,6 @@ public class Development {
             }
             answer.add(cnt);
         }
-        return answer.toArray(new Integer[answer.size()])
+        return null;
     }
 }

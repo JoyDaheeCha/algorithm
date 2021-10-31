@@ -1,6 +1,5 @@
 package com.example.algorithm.programmers.bruteforce;
 
-import com.example.algorithm.programmers.greedy.JoggingSuit;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,5 @@
 package com.example.algorithm.programmers.bfsdfs;
 
-import com.example.algorithm.programmers.greedy.JoggingSuit;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

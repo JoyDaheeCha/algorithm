@@ -1,7 +1,5 @@
 package com.example.algorithm.programmers.greedy;
 
-import com.example.algorithm.nadongbin.Greedy6;
-
 import java.util.*;
 
 /**
