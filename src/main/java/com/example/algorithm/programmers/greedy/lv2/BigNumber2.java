@@ -13,32 +13,24 @@ public class BigNumber2 {
         System.out.println(solution("4177252841", 4)); // 775841
     }
     public static String solution(String number, int k) {
+        int maxNumLen = number.length() - k;
+
         Stack<Character> stack = new Stack<>();
 
         for(int i=0; i < number.length(); i++) {
             char now = number.charAt(i);
-            if(stack.isEmpty() || stack.peek() >= now || k == 0) {
-                stack.push(now);
-            }else {
-                while(!stack.isEmpty() && k > 0 && stack.peek() < now) {
-                    stack.pop();
-                    k--;
-                }
-                stack.push(now);
+            while(!stack.isEmpty() && stack.peek() < now && k-- > 0 ) {
+                stack.pop();
             }
+            stack.push(now);
         }
 
-        // 1111, 10000인 경우
-        while(k!=0) {
-            stack.pop();
-            k--;
-        }
 
         StringBuilder sb = new StringBuilder();
-        while(!stack.isEmpty()) {
-            sb.append(stack.pop());
+        for(int j=0; j < maxNumLen; j++) {
+            sb.append(stack.get(j));
         }
 
-        return sb.reverse().toString();
+        return sb.toString();
     }
 }
